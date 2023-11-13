@@ -9,9 +9,12 @@
         </a>
       </div>
       <div>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
+        <NuxtLink
+          to="/login"
+          class="text-sm font-semibold leading-6 text-gray-900"
+        >
           Log in <span aria-hidden="true">&rarr;</span>
-        </a>
+        </NuxtLink>
       </div>
     </nav>
   </header>

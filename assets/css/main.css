@@ -4,6 +4,6 @@
 
 @layer base {
   main {
-    @apply grow;
+    @apply grow bg-gray-50;
   }
 }
