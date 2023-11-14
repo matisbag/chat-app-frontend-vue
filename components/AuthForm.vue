@@ -66,7 +66,12 @@ const props = defineProps<{
   type: "login" | "signup";
 }>();
 
-const user = ref({
+interface UserForm {
+  email: string;
+  password: string;
+}
+
+const user = ref<UserForm>({
   email: "",
   password: "",
 });
