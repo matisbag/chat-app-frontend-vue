@@ -26,7 +26,7 @@ export const useAuth = () => {
           email,
           password,
         },
-      }
+      },
     );
 
     setUser(data.user);
