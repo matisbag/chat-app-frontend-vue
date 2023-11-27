@@ -9,7 +9,11 @@
         </a>
       </div>
       <div>
+        <span v-if="isAuth" class="font-medium text-gray-900">
+          {{ user?.email }}
+        </span>
         <NuxtLink
+          v-else
           to="/login"
           class="text-sm font-semibold leading-6 text-gray-900"
         >
@@ -19,3 +23,7 @@
     </nav>
   </header>
 </template>
+
+<script lang="ts" setup>
+const { isAuth, user } = useAuth();
+</script>

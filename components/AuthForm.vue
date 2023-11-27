@@ -9,7 +9,10 @@
         >
           {{ loginPage ? "Login" : "Create account" }}
         </h1>
-        <form class="space-y-4 md:space-y-6" action="#">
+        <form
+          class="space-y-4 md:space-y-6"
+          @submit.prevent="loginPage ? onLogin() : onLogin()"
+        >
           <div>
             <label
               for="email"
@@ -18,7 +21,7 @@
               Email
             </label>
             <input
-              v-model="user.email"
+              v-model="form.email"
               type="email"
               id="email"
               class="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 dark:placeholder-gray-400 text-white focus:ring-primary focus:border-primary"
@@ -33,7 +36,7 @@
               Password
             </label>
             <input
-              v-model="user.password"
+              v-model="form.password"
               type="password"
               id="password"
               placeholder="••••••••"
@@ -62,19 +65,29 @@
 </template>
 
 <script lang="ts" setup>
+import type { UserForm } from "~/types/user";
 const props = defineProps<{
   type: "login" | "signup";
 }>();
 
-interface UserForm {
-  email: string;
-  password: string;
-}
+const router = useRouter();
+const { login } = useAuth();
 
-const user = ref<UserForm>({
+const form = reactive<UserForm>({
   email: "",
   password: "",
 });
 
 const loginPage = computed(() => props.type === "login");
+
+// TODO: add signup function
+// TODO: form validation
+async function onLogin() {
+  try {
+    await login(form.email, form.password);
+    router.push("/c");
+  } catch (error: any) {
+    console.error(error);
+  }
+}
 </script>
