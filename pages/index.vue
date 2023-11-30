@@ -8,7 +8,7 @@
         Hello world!
       </h1>
       <p className="mt-6 text-base leading-7 text-gray-600">
-        <NuxtLink to="/c">chat</NuxtLink>
+        <UButton to="/c">chat</UButton>
       </p>
     </div>
   </main>
