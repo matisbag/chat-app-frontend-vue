@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   typescript: {
-    shim: false,
+    strict: true,
   },
 
   modules: ["@nuxt/ui"],
