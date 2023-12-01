@@ -36,7 +36,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   <main class="flex flex-col items-center justify-center px-6 py-8 lg:py-0">
     <UCard as="section" class="w-full sm:max-w-xl">
       <template #header>
-        <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl">
+        <h1>
           {{ loginPage ? "Login" : "Create account" }}
         </h1>
       </template>
@@ -59,7 +59,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           />
         </UFormGroup>
 
-        <UButton type="submit" size="md" block>
+        <UButton type="submit" block>
           {{ loginPage ? "Log in" : "Create" }}
         </UButton>
 
