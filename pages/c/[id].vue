@@ -6,6 +6,6 @@
 definePageMeta({
   layout: "chat",
   middleware: "auth",
-});
-const route = useRoute();
+})
+const route = useRoute()
 </script>

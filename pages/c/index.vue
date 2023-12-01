@@ -6,5 +6,5 @@
 definePageMeta({
   layout: "chat",
   middleware: "auth",
-});
+})
 </script>
