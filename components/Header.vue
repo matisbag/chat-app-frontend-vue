@@ -9,9 +9,15 @@
         </a>
       </div>
       <div>
-        <span v-if="isAuth" class="font-medium text-gray-900">
-          {{ user?.email }}
-        </span>
+        <UDropdown
+          v-if="isAuth"
+          :items="dropdownItems"
+          :popper="{ placement: 'bottom' }"
+        >
+          <span class="font-medium text-gray-900">
+            {{ user?.email }}
+          </span>
+        </UDropdown>
         <NuxtLink
           v-else
           to="/login"
@@ -25,5 +31,25 @@
 </template>
 
 <script lang="ts" setup>
-const { isAuth, user } = useAuth();
+const { isAuth, user, logout } = useAuth();
+
+const dropdownItems = [
+  [
+    {
+      label: "Profile",
+      avatar: {
+        src: "https://avatars.githubusercontent.com/u/739984?v=4",
+      },
+    },
+  ],
+  [
+    {
+      label: "Logout",
+      icon: "i-heroicons-arrow-left-on-rectangle-20-solid",
+      click: () => {
+        logout();
+      },
+    },
+  ],
+];
 </script>

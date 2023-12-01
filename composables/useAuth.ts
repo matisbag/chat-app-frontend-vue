@@ -51,9 +51,17 @@ export const useAuth = () => {
     return user.value;
   };
 
+  // dev logout
+  const logout = () => {
+    setUser(null);
+    setToken(null);
+    reloadNuxtApp();
+  };
+
   return {
     login,
     me,
+    logout,
     user,
     isAuth,
   };
