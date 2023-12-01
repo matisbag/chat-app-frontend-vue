@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import AuthForm from "~/components/AuthForm.vue";
+definePageMeta({
+  middleware: "guest-only",
+});
 </script>
 
 <template>
