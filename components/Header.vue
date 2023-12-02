@@ -4,9 +4,9 @@
       class="container mx-auto flex items-center justify-between p-6 lg:px-8"
     >
       <div class="flex">
-        <a href="/" class="-m-1.5 p-1.5">
+        <NuxtLink to="/" class="-m-1.5 p-1.5">
           <img class="h-8 w-auto" src="/icon.png" alt="" />
-        </a>
+        </NuxtLink>
       </div>
       <div>
         <UDropdown
