@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { z } from "zod";
-import type { FormSubmitEvent } from "#ui/types";
+import { z } from "zod"
+import type { FormSubmitEvent } from "#ui/types"
 
 const props = defineProps<{
-  type: "login" | "signup";
-}>();
+  type: "login" | "signup"
+}>()
 
-const router = useRouter();
-const { login } = useAuth();
+const router = useRouter()
+const { login } = useAuth()
 const state = reactive({
   email: undefined,
   password: undefined,
-});
-const loginPage = computed(() => props.type === "login");
+})
+const loginPage = computed(() => props.type === "login")
 
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(4, "Must be at least 4 characters"),
-});
+})
 
-type Schema = z.output<typeof schema>;
+type Schema = z.output<typeof schema>
 
 // TODO: add signup function
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
-    await login(event.data.email, event.data.password);
-    router.push("/c");
+    await login(event.data.email, event.data.password)
+    router.push("/c")
   } catch (error: any) {
-    console.error(error);
+    console.error(error)
   }
 }
 </script>

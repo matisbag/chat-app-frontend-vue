@@ -18,9 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { Chat } from "@/types/chat";
+import type { Chat } from "@/types/chat"
 
 defineProps<{
-  item: Chat;
-}>();
+  item: Chat
+}>()
 </script>

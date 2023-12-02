@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-const { isAuth, user, logout } = useAuth();
+const { isAuth, user, logout } = useAuth()
 
 const dropdownItems = [
   [
@@ -47,9 +47,9 @@ const dropdownItems = [
       label: "Logout",
       icon: "i-heroicons-arrow-left-on-rectangle-20-solid",
       click: () => {
-        logout();
+        logout()
       },
     },
   ],
-];
+]
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Chat } from "@/types/chat";
+import type { Chat } from "@/types/chat"
 
 const chats: Chat[] = [
   {
@@ -22,7 +22,7 @@ const chats: Chat[] = [
     name: "Jane Smith",
     lastMessage: "Hi",
   },
-];
+]
 </script>
 
 <template>
