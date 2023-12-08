@@ -2,6 +2,10 @@
 definePageMeta({
   middleware: "guest-only",
 })
+
+useHead({
+  titleTemplate: "%s - Login",
+})
 </script>
 
 <template>
