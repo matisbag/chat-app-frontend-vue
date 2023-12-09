@@ -1,8 +1,5 @@
 import type { User, UserLoginResponse } from "~/types/user"
 
-// TODO: gérer les erreurs
-// ? utiliser le hook useFetch ?
-
 export const useAuth = () => {
   const config = useRuntimeConfig()
   const token = useCookie<string | null>("token")
@@ -18,21 +15,24 @@ export const useAuth = () => {
   }
 
   const login = async (email: string, password: string) => {
-    const data = await $fetch<UserLoginResponse>(
-      config.public.apiBase + "/auth/login",
-      {
-        method: "POST",
-        body: {
-          email,
-          password,
-        },
+    const router = useRouter()
+    const toast = useToast()
+
+    return await useFetchApi<UserLoginResponse>("/auth/login", {
+      method: "POST",
+      body: {
+        email,
+        password,
       },
-    )
-
-    setUser(data.user)
-    setToken(data.token)
-
-    return user.value
+      onResponse(_ctx) {
+        setUser(_ctx.response._data.user)
+        setToken(_ctx.response._data.token)
+        router.push("/c")
+      },
+      onResponseError(_ctx) {
+        toast.add({ title: _ctx.response._data.message, color: "red" })
+      },
+    })
   }
 
   const me = async () => {

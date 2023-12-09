@@ -6,12 +6,12 @@ const props = defineProps<{
   type: "login" | "signup"
 }>()
 
-const router = useRouter()
 const { login } = useAuth()
 const state = reactive({
   email: undefined,
   password: undefined,
 })
+const pending = ref(false)
 const loginPage = computed(() => props.type === "login")
 
 const schema = z.object({
@@ -23,12 +23,9 @@ type Schema = z.output<typeof schema>
 
 // TODO: add signup function
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  try {
-    await login(event.data.email, event.data.password)
-    router.push("/c")
-  } catch (error: any) {
-    console.error(error)
-  }
+  pending.value = true
+  await login(event.data.email, event.data.password)
+  pending.value = false
 }
 </script>
 
@@ -59,7 +56,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           />
         </UFormGroup>
 
-        <UButton type="submit" block>
+        <UButton type="submit" :loading="pending" block>
           {{ loginPage ? "Log in" : "Create" }}
         </UButton>
 
