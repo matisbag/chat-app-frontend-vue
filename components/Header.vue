@@ -15,7 +15,7 @@
           :popper="{ placement: 'bottom' }"
         >
           <span class="font-medium text-gray-900">
-            {{ user?.email }}
+            {{ user?.pseudo }}
           </span>
         </UDropdown>
         <NuxtLink

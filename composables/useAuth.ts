@@ -1,7 +1,6 @@
-import type { User, UserLoginResponse } from "~/types/user"
+import type { User, UserLoginResponse, UserWithoutPassword } from "~/types/user"
 
 export const useAuth = () => {
-  const config = useRuntimeConfig()
   const token = useCookie<string | null>("token")
   const user = useState<User | null>("user", () => null)
   const isAuth = computed<boolean>(() => !!user.value)
@@ -26,7 +25,7 @@ export const useAuth = () => {
       },
       onResponse(_ctx) {
         setUser(_ctx.response._data.user)
-        setToken(_ctx.response._data.token)
+        setToken(_ctx.response._data.token.token)
         router.push("/c")
       },
       onResponseError(_ctx) {
@@ -36,26 +35,28 @@ export const useAuth = () => {
   }
 
   const me = async () => {
-    if (token.value) {
-      try {
-        const data = await $fetch<User>(config.public.apiBase + "/auth/me", {
-          headers: { Authorization: `Bearer ${token.value}` },
-        })
-
-        setUser(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    return user.value
+    return await useFetchApi<UserWithoutPassword>("/auth/me", {
+      method: "GET",
+      onResponse(_ctx) {
+        setUser(_ctx.response._data)
+      },
+      onResponseError() {
+        setUser(null)
+        setToken(null)
+      },
+    })
   }
 
   // dev logout
-  const logout = () => {
-    setUser(null)
-    setToken(null)
-    reloadNuxtApp()
+  const logout = async () => {
+    await useFetchApi("/auth/logout", {
+      method: "POST",
+      onResponse() {
+        setUser(null)
+        setToken(null)
+        reloadNuxtApp()
+      },
+    })
   }
 
   return {
