@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="'/c/' + item.id"
-    class="hover:bg-gray-200 rounded flex flex-row items-center py-4 px-2"
+    class="hover:bg-gray-100 rounded flex flex-row items-center py-4 px-2"
   >
     <div class="w-1/4">
       <UAvatar
