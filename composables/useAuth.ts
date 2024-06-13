@@ -14,28 +14,28 @@ export const useAuth = () => {
   }
 
   const login = async (email: string, password: string) => {
-    const router = useRouter()
-    const toast = useToast()
+    const { $api } = useNuxtApp()
 
-    return await useFetchApi<UserLoginResponse>("/auth/login", {
-      method: "POST",
-      body: {
-        email,
-        password,
-      },
-      onResponse(_ctx) {
-        setUser(_ctx.response._data.user)
-        setToken(_ctx.response._data.token.token)
-        router.push("/c")
-      },
-      onResponseError(_ctx) {
-        toast.add({ title: _ctx.response._data.message, color: "red" })
-      },
-    })
+    try {
+      const data: UserLoginResponse = await $api<UserLoginResponse>(
+        "/auth/login",
+        {
+          method: "POST",
+          body: {
+            email,
+            password,
+          },
+        },
+      )
+
+      setUser(data.user)
+      setToken(data.token.token)
+      await navigateTo("/c")
+    } catch (err) {}
   }
 
   const me = async () => {
-    return await useFetchApi<UserWithoutPassword>("/auth/me", {
+    return await useAPI<UserWithoutPassword>("/auth/me", {
       method: "GET",
       onResponse(_ctx) {
         setUser(_ctx.response._data)
@@ -49,14 +49,13 @@ export const useAuth = () => {
 
   // dev logout
   const logout = async () => {
-    await useFetchApi("/auth/logout", {
-      method: "POST",
-      onResponse() {
-        setUser(null)
-        setToken(null)
-        reloadNuxtApp()
-      },
-    })
+    const { $api } = useNuxtApp()
+
+    await $api("/auth/logout", { method: "POST" })
+
+    setUser(null)
+    setToken(null)
+    reloadNuxtApp()
   }
 
   return {
