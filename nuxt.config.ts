@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     strict: true,
   },
 
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@nuxt/image"],
 
   tailwindcss: {
     cssPath: "~/assets/css/main.css",

@@ -5,7 +5,7 @@
     >
       <div class="flex">
         <NuxtLink to="/" class="-m-1.5 p-1.5">
-          <img class="h-8 w-auto" src="/icon.png" alt="" />
+          <NuxtImg src="/icon.png" alt="icon" width="32" height="32" />
         </NuxtLink>
       </div>
       <div>
