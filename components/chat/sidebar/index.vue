@@ -1,28 +1,9 @@
-<script lang="ts" setup>
-import type { Chat } from "@/types/chat"
+<script setup lang="ts">
+import type { Conversation } from "~/types/chat"
 
-const chats: Chat[] = [
-  {
-    id: 1,
-    name: "John Doe",
-    lastMessage: "Hello",
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-    lastMessage: "Hi",
-  },
-  {
-    id: 3,
-    name: "John Smith",
-    lastMessage: "Hey",
-  },
-  {
-    id: 4,
-    name: "Jane Smith",
-    lastMessage: "Hi",
-  },
-]
+defineProps<{
+  conversations: Conversation[] | null
+}>()
 </script>
 
 <template>
@@ -39,8 +20,6 @@ const chats: Chat[] = [
       </div>
       <ChatSidebarFilters />
     </div>
-    <div>
-      <ChatSidebarListChat v-for="chat in chats" :key="chat.id" :item="chat" />
-    </div>
+    <ChatSidebarListChat :conversations="conversations" />
   </div>
 </template>

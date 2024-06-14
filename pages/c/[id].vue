@@ -1,5 +1,9 @@
 <template>
-  <div>{{ route.params.id }}</div>
+  <section class="flex flex-col w-full">
+    <ChatContentHeader />
+    <div class="grow">ceci est le content : {{ route.params.id }}</div>
+    <ChatContentInputBar />
+  </section>
 </template>
 
 <script lang="ts" setup>

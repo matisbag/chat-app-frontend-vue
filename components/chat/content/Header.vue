@@ -1,0 +1,32 @@
+<script lang="ts" setup>
+const { selectedConversation } = useConversation()
+</script>
+
+<template>
+  <div class="px-4 py-2 flex space-x-4 items-center bg-gray-100">
+    <UAvatarGroup size="md" :max="2">
+      <UAvatar
+        src="https://avatars.githubusercontent.com/u/739984?v=4"
+        alt="benjamincanac"
+      />
+      <UAvatar
+        src="https://avatars.githubusercontent.com/u/904724?v=4"
+        alt="Atinux"
+      />
+      <UAvatar
+        src="https://avatars.githubusercontent.com/u/7547335?v=4"
+        alt="smarroufin"
+      />
+    </UAvatarGroup>
+    <div class="grow">
+      <div class="text-lg font-medium">{{ selectedConversation?.title }}</div>
+      <div class="text-sm text-gray-500">Description du groupe</div>
+    </div>
+    <UButton
+      color="gray"
+      variant="link"
+      size="xl"
+      icon="i-heroicons-ellipsis-vertical"
+    />
+  </div>
+</template>
