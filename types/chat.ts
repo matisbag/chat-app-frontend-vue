@@ -1,6 +1,7 @@
 export interface Message {
   id?: number
   content: string
+  userId: number
   createdAt: Date
 }
 

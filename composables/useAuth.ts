@@ -35,7 +35,7 @@ export const useAuth = () => {
   }
 
   const me = async () => {
-    return await useAPI<UserWithoutPassword>("/auth/me", {
+    return await useApi<UserWithoutPassword>("/auth/me", {
       method: "GET",
       onResponse(_ctx) {
         setUser(_ctx.response._data)

@@ -7,11 +7,13 @@ const props = defineProps<{
   conversations?: Conversation[] | null
 }>()
 
-onMounted(() => {
+onMounted(async () => {
   if (props.conversations?.find((item) => item.id === route.params.id)) {
     selectConversation(
       props.conversations.find((item) => item.id === route.params.id),
     )
+  } else if (route.params.id) {
+    await navigateTo("/c")
   }
 })
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Conversation } from "@/types/chat"
 
-const { data: conversations } = await useAPI<Conversation[]>("/conversations", {
+const { data: conversations } = await useApi<Conversation[]>("/conversations", {
   method: "GET",
 })
 </script>
