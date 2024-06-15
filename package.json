@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.16.0",
+    "date-fns": "^3.6.0",
     "zod": "^3.23.8"
   }
 }

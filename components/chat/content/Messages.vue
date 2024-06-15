@@ -4,20 +4,17 @@ import type { Message } from "~/types/chat"
 defineProps<{ messages: Message[] }>()
 
 const { user } = useAuth()
+const { $formatRelativeDate } = useNuxtApp()
 
 const isOwnMessage = (message: Message) => {
   return message.userId === user.value?.id
 }
-
-const formatTimestamp = (timestamp: string) => {
-  const date = new Date(timestamp)
-  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-}
 </script>
 
 <template>
-  <div class="grow overflow-y-scroll flex flex-col h-full p-4 space-y-4">
-    <div class="grow"></div>
+  <div
+    class="grow overflow-y-scroll flex flex-col-reverse p-4 space-y-4 space-y-reverse"
+  >
     <div
       v-for="message in messages"
       :key="message.id"
@@ -31,9 +28,12 @@ const formatTimestamp = (timestamp: string) => {
           'bg-gray-200 text-gray-800': !isOwnMessage(message),
         }"
       >
+        <p v-if="!isOwnMessage(message)" class="text-sm font-bold">
+          {{ message.user.pseudo }}
+        </p>
         <p class="text-sm">{{ message.content }}</p>
         <span class="mt-1 text-xs text-gray-500 block text-right">
-          {{ formatTimestamp(message.createdAt.toLocaleString()) }}
+          {{ $formatRelativeDate(message.createdAt) }}
         </span>
       </div>
     </div>
