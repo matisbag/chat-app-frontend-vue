@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-col w-full">
     <ChatContentHeader />
-    <ChatContentMessageList :messages="messages" />
+    <ChatContentListMessage :messages="messages" />
     <ChatContentInputBar
       v-if="selectedConversation"
       :conversation-id="selectedConversation.id"

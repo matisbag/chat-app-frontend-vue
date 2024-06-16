@@ -20,6 +20,6 @@ defineProps<{
       </div>
       <ChatSidebarFilters />
     </div>
-    <ChatSidebarListChat :conversations="conversations" />
+    <ChatSidebarListConversation :conversations="conversations" />
   </div>
 </template>
