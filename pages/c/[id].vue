@@ -2,12 +2,14 @@
   <section class="flex flex-col w-full">
     <ChatContentHeader />
     <ChatContentMessages :messages="messages" />
-    <ChatContentInputBar />
+    <ChatContentInputBar
+      v-if="selectedConversation"
+      :conversation-id="selectedConversation.id"
+    />
   </section>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue"
 import type { Message } from "~/types/chat"
 import { useConversation } from "~/composables/useConversation"
 
