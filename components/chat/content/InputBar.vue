@@ -7,6 +7,7 @@
       :maxrows="7"
       autoresize
       class="grow"
+      @keydown.enter.prevent="handleEnterKey"
     />
     <UButton
       color="gray"
@@ -34,7 +35,15 @@ async function sendMessage() {
     method: "POST",
     body: { content: messageContent.value },
   })
+  messageContent.value = ""
+}
+
+function handleEnterKey(event: KeyboardEvent) {
+  if (event.shiftKey) {
+    // Allow newline with Shift + Enter
+    messageContent.value += "\n"
+  } else {
+    sendMessage()
+  }
 }
 </script>
-
-<style></style>

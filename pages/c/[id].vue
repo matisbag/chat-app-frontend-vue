@@ -19,9 +19,24 @@ definePageMeta({
 })
 
 const { selectedConversation } = useConversation()
-const { $api } = useNuxtApp()
+const { $api, $socket } = useNuxtApp()
+const route = useRoute()
 
 const messages = ref<Message[]>([])
+
+onMounted(() => {
+  $socket.emit("joinConversation", route.params.id)
+
+  $socket.on("newMessage", (message) => {
+    // console.log("newMessage", message)
+    messages.value.unshift(message)
+  })
+})
+
+onBeforeUnmount(() => {
+  $socket.emit("leaveConversation", route.params.id)
+  $socket.off("newMessage")
+})
 
 watch(
   () => selectedConversation.value,
