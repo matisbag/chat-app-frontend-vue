@@ -6,25 +6,47 @@ const props = defineProps<{
   type: "login" | "signup"
 }>()
 
-const { login } = useAuth()
+const { login, signup } = useAuth()
+const toast = useToast()
 const state = reactive({
   email: undefined,
+  pseudo: undefined,
   password: undefined,
 })
 const pending = ref(false)
 const loginPage = computed(() => props.type === "login")
 
-const schema = z.object({
+const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(4, "Must be at least 4 characters"),
 })
 
-type Schema = z.output<typeof schema>
+const signupSchema = z.object({
+  email: z.string().email(),
+  pseudo: z.string().min(4, "Must be at least 4 characters"),
+  password: z.string().min(4, "Must be at least 4 characters"),
+})
 
-// TODO: add signup function
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+const schema = computed(() => (loginPage.value ? loginSchema : signupSchema))
+
+type LoginSchema = z.infer<typeof loginSchema>
+type SignupSchema = z.infer<typeof signupSchema>
+
+async function onSubmit(event: FormSubmitEvent<LoginSchema | SignupSchema>) {
   pending.value = true
-  await login(event.data.email, event.data.password)
+  if (loginPage.value) {
+    const { email, password } = event.data as LoginSchema
+    await login(email, password)
+  } else {
+    const { email, pseudo, password } = event.data as SignupSchema
+    await signup(email, pseudo, password).then(() => {
+      toast.add({
+        color: "green",
+        title: "Account created",
+        description: "You can now log in",
+      })
+    })
+  }
   pending.value = false
 }
 </script>
@@ -46,6 +68,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       >
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" placeholder="example@gmail.com" />
+        </UFormGroup>
+
+        <UFormGroup v-if="!loginPage" label="Pseudo" name="pseudo">
+          <UInput v-model="state.pseudo" placeholder="Your pseudo" />
         </UFormGroup>
 
         <UFormGroup label="Password" name="password">

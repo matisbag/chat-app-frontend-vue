@@ -34,6 +34,23 @@ export const useAuth = () => {
     } catch (err) {}
   }
 
+  const signup = async (email: string, pseudo: string, password: string) => {
+    const { $api } = useNuxtApp()
+
+    try {
+      await $api<UserLoginResponse>("/auth/register", {
+        method: "POST",
+        body: {
+          email,
+          pseudo,
+          password,
+        },
+      })
+
+      await navigateTo("/login")
+    } catch (err) {}
+  }
+
   const me = async () => {
     return await useApi<UserWithoutPassword>("/auth/me", {
       method: "GET",
@@ -60,6 +77,7 @@ export const useAuth = () => {
 
   return {
     login,
+    signup,
     me,
     logout,
     user,
