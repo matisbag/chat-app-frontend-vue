@@ -1,7 +1,7 @@
 <template>
   <header class="bg-white shadow-sm z-10">
     <nav
-      class="container mx-auto flex items-center justify-between p-6 lg:px-8"
+      class="max-w-screen-2xl mx-auto flex items-center justify-between p-6 lg:px-8"
     >
       <div class="flex">
         <NuxtLink to="/" class="-m-1.5 p-1.5">
