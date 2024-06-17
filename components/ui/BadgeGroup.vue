@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue"
-
 const props = defineProps<{
   items: { label: string; value: string }[]
   modelValue: string
