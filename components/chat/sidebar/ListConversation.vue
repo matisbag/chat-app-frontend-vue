@@ -39,7 +39,7 @@ onMounted(async () => {
               {{ item.title }}
             </div>
             <div class="text-gray-500 truncate">
-              {{ item.lastMessage.content }}
+              {{ item.lastMessage?.content }}
             </div>
           </div>
         </NuxtLink>
