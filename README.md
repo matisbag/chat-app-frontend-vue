@@ -1,75 +1,20 @@
-# Nuxt 3 Minimal Starter
+# Chat-app FRONT
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Chat-app is a real-time messaging application built with Nuxt 3 for the frontend and AdonisJS for the [backend](https://github.com/matisbag/chat-app-backend), enabling users to manage conversations and send messages efficiently.
 
-## Setup
+## Environnement setup
 
-Make sure to install the dependencies:
+1. Duplicate the `.env.example` file and rename the copy to `.env`.
+2. Open the `.env` file and fill in the appropriate values for each environment variable.
+
+## Installation & Running the Project
+
+After setting up the environment variables, follow these steps to install and run the project:
 
 ```bash
-# npm
+# Install dependencies
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+# Run the server
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
