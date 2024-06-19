@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const { selectedConversation } = useConversation()
+const isModalConversationOpen = ref(false)
 </script>
 
 <template>
@@ -18,15 +19,28 @@ const { selectedConversation } = useConversation()
         alt="smarroufin"
       />
     </UAvatarGroup>
-    <div class="grow">
-      <div class="text-lg font-medium">{{ selectedConversation?.title }}</div>
-      <div class="text-sm text-gray-500">Description du groupe</div>
+    <div class="grow min-w-0">
+      <div
+        class="text-lg font-medium truncate"
+        :title="selectedConversation?.title"
+      >
+        {{ selectedConversation?.title }}
+      </div>
+      <div class="text-sm text-gray-500 truncate">
+        Vous,
+        {{ selectedConversation?.users.map((user) => user.pseudo).join(", ") }}
+      </div>
     </div>
     <UButton
       color="gray"
       variant="link"
       size="xl"
       icon="i-heroicons-ellipsis-vertical"
+      @click="isModalConversationOpen = true"
+    />
+    <ChatModalConversation
+      v-model="isModalConversationOpen"
+      :conversation="selectedConversation"
     />
   </div>
 </template>

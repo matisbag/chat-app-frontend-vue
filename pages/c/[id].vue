@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col w-full">
+  <section class="grow overflow-hidden flex flex-col">
     <ChatContentHeader />
     <ChatContentListMessage :messages="messages" />
     <ChatContentInputBar
