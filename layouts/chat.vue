@@ -1,8 +1,22 @@
 <script lang="ts" setup>
-import type { Conversation } from "@/types/chat"
+const { $socket } = useNuxtApp()
+const { fetchConversations, conversations } = useConversation()
 
-const { data: conversations } = await useApi<Conversation[]>("/conversations", {
-  method: "GET",
+onMounted(async () => {
+  await fetchConversations()
+
+  $socket.on("newConversation", async () => {
+    await fetchConversations()
+  })
+
+  $socket.on("newMessage", async () => {
+    await fetchConversations()
+  })
+})
+
+onBeforeUnmount(() => {
+  $socket.off("newConversation")
+  $socket.off("newMessage")
 })
 </script>
 

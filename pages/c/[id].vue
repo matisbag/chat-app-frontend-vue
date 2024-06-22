@@ -28,7 +28,6 @@ onMounted(() => {
   $socket.emit("joinConversation", route.params.id)
 
   $socket.on("newMessage", (message) => {
-    // console.log("newMessage", message)
     messages.value.unshift(message)
   })
 })
